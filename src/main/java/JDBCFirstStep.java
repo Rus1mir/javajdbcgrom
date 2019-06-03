@@ -3,7 +3,7 @@ import java.sql.*;
 public class JDBCFirstStep {
 
     private static final String JDBC_DRIVER = "oracle.jdbc.driver.OracleDriver";
-    private static final String DB_URL = "";
+    private static final String DB_URL = "some url";
 
     private static final String USER = "main";
     private static final String PASS = "dwd";
