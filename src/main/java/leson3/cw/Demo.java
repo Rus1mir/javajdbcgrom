@@ -1,4 +1,4 @@
-package leson3;
+package leson3.cw;
 
 public class Demo {
 
