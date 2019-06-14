@@ -17,21 +17,22 @@ public class Solution {
 
     public List<Product> findProductsByPrice(int price, int delta) {
 
-        try (Connection connection = getConnection()) {
+        String sql = "SELECT * FROM PRODUCT WHERE PRICE BETWEEN ? AND ?";
 
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM PRODUCT " +
-                    "WHERE PRICE BETWEEN ? AND ?");
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setInt(1, (price - delta));
             preparedStatement.setInt(2, (price + delta));
 
-            ResultSet resultSet = preparedStatement.executeQuery();
-            ArrayList<Product> products = new ArrayList<>();
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                ArrayList<Product> products = new ArrayList<>();
 
-            while (resultSet.next()) {
-                products.add(mapping(resultSet));
+                while (resultSet.next()) {
+                    products.add(mapping(resultSet));
+                }
+                return products;
             }
-            return products;
 
         } catch (SQLException e) {
             System.err.println("Something went wrong");
@@ -40,24 +41,24 @@ public class Solution {
         return null;
     }
 
-    public List<Product> findProductsByName(String word) throws BadRequestException {
+    public List<Product> findProductsByName(String word) throws Exception {
 
         validate(word);
+        String sql = "SELECT * FROM PRODUCT WHERE NAME LIKE ?";
 
-        try (Connection connection = getConnection()) {
-
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM PRODUCT " +
-                    "WHERE NAME LIKE ?");
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setString(1, ("%" + word + "%"));
 
-            ResultSet resultSet = preparedStatement.executeQuery();
-            ArrayList<Product> products = new ArrayList<>();
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                ArrayList<Product> products = new ArrayList<>();
 
-            while (resultSet.next()) {
-                products.add(mapping(resultSet));
+                while (resultSet.next()) {
+                    products.add(mapping(resultSet));
+                }
+                return products;
             }
-            return products;
 
         } catch (SQLException e) {
             System.err.println("Something went wrong");
@@ -69,12 +70,11 @@ public class Solution {
 
     public List<Product> findProductsWithEmptyDescription() {
 
-        try (Connection connection = getConnection()) {
+        String sql = "SELECT * FROM PRODUCT WHERE DESCRIPTION IS NULL OR LENGTH(TRIM(DESCRIPTION)) = 0";
 
-            Statement statement = connection.createStatement();
-
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM PRODUCT " +
-                    "WHERE DESCRIPTION IS NULL OR LENGTH(TRIM(DESCRIPTION)) = 0");
+        try (Connection connection = getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(sql)) {
 
             ArrayList<Product> products = new ArrayList<>();
 
@@ -101,17 +101,17 @@ public class Solution {
                 set.getInt(4));
     }
 
-    private void validate(String request) throws BadRequestException {
+    private void validate(String request) throws Exception {
 
         //больше одного слова в стринге, длина меньше 3, содержит спецсимволы
         if (request.contains(" "))
-            throw new BadRequestException("Request " + request + " is wrong cause it contains space symbols");
+            throw new Exception("Request " + request + " is wrong cause it contains space symbols");
 
         if (request.length() < 3)
-            throw new BadRequestException("Request " + request + " is too short, minimum 3 symbols required");
+            throw new Exception("Request " + request + " is too short, minimum 3 symbols required");
 
         if (!Pattern.matches("[A-Za-z]+", request))
-            throw new BadRequestException("Request " + request + " haz illegal symbols");
+            throw new Exception("Request " + request + " haz illegal symbols");
 
     }
 }
