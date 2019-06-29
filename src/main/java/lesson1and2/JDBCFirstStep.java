@@ -11,7 +11,7 @@ public class JDBCFirstStep {
     private static final String PASS = "rjycnbnewbz";
 
     /*
-    Напишите SQL запрос для создания таблицы PRODUCT с полями:
+    Напишите sql запрос для создания таблицы PRODUCT с полями:
     ID - уникальной идендификатор
     NAME - текстовое поле, которое не может быть пустым
     DESCRIPTION - текстовое поле, которое может содержать максимально большой текст

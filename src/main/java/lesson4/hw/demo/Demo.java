@@ -1,4 +1,4 @@
-package lesson4.hw.test;
+package lesson4.hw.demo;
 
 import lesson4.hw.controller.FileController;
 import lesson4.hw.controller.StorageController;

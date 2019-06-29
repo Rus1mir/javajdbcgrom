@@ -21,7 +21,7 @@ public class Solution {
             while (index < 1000) {
 
                 preparedStatement.setLong(1, index);
-                preparedStatement.setString(2, "test");
+                preparedStatement.setString(2, "demo");
                 preparedStatement.setLong(3, index);
 
                 preparedStatement.executeUpdate();
@@ -138,7 +138,7 @@ public class Solution {
 }
     /*testSavePerformance() - который будет успешно добавлять 1000 записей в таблицу TEST_SPEED c произвольными значениями
     testDeleteByIdPerformance() - будет удалять 1000 добавленных перед этим записей, отдельными запросами по полю ID
-    testDeletePerformance - будет удалять 1000, одним SQL запросом()
+    testDeletePerformance - будет удалять 1000, одним sql запросом()
     testSelectByIdPerformance() - будет выбирать по очереди 1000 добавленных перед этим записей, отдельными запросами по полю ID
-    testSelectPerformance() - будет выбирать 1000 записей, одним SQL запросом
+    testSelectPerformance() - будет выбирать 1000 записей, одним sql запросом
      */

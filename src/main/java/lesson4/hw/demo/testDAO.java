@@ -1,7 +1,7 @@
-package lesson4.hw.test;
+package lesson4.hw.demo;
 
-import lesson4.hw.DAO.FileDAO;
-import lesson4.hw.DAO.StorageDAO;
+import lesson4.hw.dao.FileDAO;
+import lesson4.hw.dao.StorageDAO;
 import lesson4.hw.model.File;
 import lesson4.hw.model.Storage;
 

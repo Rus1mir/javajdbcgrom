@@ -1,8 +1,8 @@
 package lesson4.hw.service;
 
-import lesson4.hw.DAO.FileDAO;
-import lesson4.hw.DAO.StorageDAO;
-import lesson4.hw.Exception.BadRequestException;
+import lesson4.hw.dao.FileDAO;
+import lesson4.hw.dao.StorageDAO;
+import lesson4.hw.exception.BadRequestException;
 import lesson4.hw.model.Storage;
 
 import java.sql.SQLException;

@@ -1,7 +1,7 @@
 package lesson4.hw.service;
 
-import lesson4.hw.DAO.FileDAO;
-import lesson4.hw.Exception.BadRequestException;
+import lesson4.hw.dao.FileDAO;
+import lesson4.hw.exception.BadRequestException;
 import lesson4.hw.model.File;
 import lesson4.hw.model.Storage;
 
