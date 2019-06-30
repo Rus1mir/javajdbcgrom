@@ -12,9 +12,9 @@ public class Demo {
 
         TransactionDemo transactionDemo = new TransactionDemo();
 
-        Product product1 = new Product(232, "!!!", "!!!", 7777);
-        Product product2 = new Product(336, "!!!", "!!!", 7777);
-        Product product3 = new Product(338, "!!!", "!!!", 7777);
+        Product product1 = new Product(1232, "!!!", "!!!", 7777);
+        Product product2 = new Product(1336, "!!!", "!!!", 7777);
+        Product product3 = new Product(1338, "!!!", "!!!", 7777);
 
         List<Product> products = new ArrayList<>();
 
