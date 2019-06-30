@@ -4,18 +4,17 @@ import org.hibernate.Session;
 
 public class Demo {
     public static void main(String[] args) {
-        Session session = new HibernateUtils().createSessionFactory().openSession();
 
-        session.getTransaction().begin();
+        ProductRepository repository = new ProductRepository();
 
         Product product = new Product();
-        product.setId(99);
-        product.setName("table");
-        product.setDescription("grey & blue");
-        product.setPrice(77);
+        product.setId(100);
+        product.setName("mustdie123");
+        product.setDescription("i will go to hell");
+        product.setPrice(33);
 
-        session.save(product);
-
-        session.getTransaction().commit();
+        //repository.save(product);
+        //repository.update(product);
+        repository.delete(100L);
     }
 }
