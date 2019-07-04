@@ -77,7 +77,7 @@ public class ProductDAO {
         try (Session session = createSessionFactory().openSession()) {
 
             Query<hibernate.lesson2.hw3.Product> query = session.createNativeQuery("SELECT * FROM PRODUCT WHERE NAME LIKE ? " +
-                    "ORDER BY NAME ASC", hibernate.lesson2.hw3.Product.class);
+                    "ORDER BY NAME ASC", Product.class);
             query.setParameter(1, name);
 
             return query.list();
