@@ -25,7 +25,7 @@ public class ProductDAO {
         }
     }
 
-    public List<hibernate.lesson2.hw3.Product> findByName(String name) throws Exception {
+    public List<Product> findByName(String name) throws Exception {
         //-поиск продуктов по имени
 
         try (Session session = createSessionFactory().openSession()) {
@@ -40,7 +40,7 @@ public class ProductDAO {
         }
     }
 
-    public List<hibernate.lesson2.hw3.Product> findByContainedName(String name) throws Exception {
+    public List<Product> findByContainedName(String name) throws Exception {
         //- поиск продуктов, которые в своем имени содержать слово name
 
         try (Session session = createSessionFactory().openSession()) {
@@ -55,7 +55,7 @@ public class ProductDAO {
         }
     }
 
-    public List<hibernate.lesson2.hw3.Product> findByPrice(int price, int delta) throws Exception {
+    public List<Product> findByPrice(int price, int delta) throws Exception {
         // - поиск продуктов по вилке цен price+-delta включительно
         try (Session session = createSessionFactory().openSession()) {
 
@@ -71,7 +71,7 @@ public class ProductDAO {
         }
     }
 
-    public List<hibernate.lesson2.hw3.Product> findByNameSortedAsc(String name) throws Exception {
+    public List<Product> findByNameSortedAsc(String name) throws Exception {
         //- поиск продуктов по имени, результат отсортирован по алфавитному порядку колонки name
 
         try (Session session = createSessionFactory().openSession()) {
@@ -87,7 +87,7 @@ public class ProductDAO {
         }
     }
 
-    public List<hibernate.lesson2.hw3.Product> findByNameSortedDesc(String name) throws Exception {
+    public List<Product> findByNameSortedDesc(String name) throws Exception {
         //- поиск продуктов по имени, результат отсортирован начиная с конца алфавита колонки name
 
         try (Session session = createSessionFactory().openSession()) {
@@ -103,7 +103,7 @@ public class ProductDAO {
         }
     }
 
-    public List<hibernate.lesson2.hw3.Product> findByPriceSortedDesc(int price, int delta) throws Exception {
+    public List<Product> findByPriceSortedDesc(int price, int delta) throws Exception {
         //- поиск продуктов по вилке цен price+-delta включительно, результат отсортирован по убыванию цен
 
         try (Session session = createSessionFactory().openSession()) {

@@ -1,7 +1,5 @@
 package hibernate.lesson2.hw3;
 
-import hibernate.lesson2.hw3.ProductDAO;
-
 public class Demo {
     public static void main(String[] args) throws Exception {
         ProductDAO dao = new ProductDAO();
