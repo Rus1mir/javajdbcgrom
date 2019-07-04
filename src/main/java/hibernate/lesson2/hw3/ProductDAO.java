@@ -1,4 +1,4 @@
-package hibernate.lesson2.hw2;
+package hibernate.lesson2.hw3;
 
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
@@ -10,14 +10,13 @@ public class ProductDAO {
 
     private SessionFactory sessionFactory;
 
-    public Product findById(Long id) throws Exception {
+    public hibernate.lesson2.hw3.Product findById(Long id) throws Exception {
         //- поиск продукта по id
 
         try (Session session = createSessionFactory().openSession()) {
 
-            //return session.get(Product.class, id);
-            Query<Product> query = session.createQuery("from Product where id = :paramId", Product.class);
-            query.setParameter("paramId", id);
+            Query<Product> query = session.createNativeQuery("SELECT * FROM PRODUCT WHERE ID = ?", Product.class);
+            query.setParameter(1, id);
 
             return query.getSingleResult();
 
@@ -26,13 +25,13 @@ public class ProductDAO {
         }
     }
 
-    public List<Product> findByName(String name) throws Exception {
+    public List<hibernate.lesson2.hw3.Product> findByName(String name) throws Exception {
         //-поиск продуктов по имени
 
         try (Session session = createSessionFactory().openSession()) {
 
-            Query<Product> query = session.createQuery("from Product where name like :paramName", Product.class);
-            query.setParameter("paramName", name);
+            Query<Product> query = session.createNativeQuery("SELECT * FROM PRODUCT WHERE NAME LIKE ?", Product.class);
+            query.setParameter(1, name);
 
             return query.list();
 
@@ -41,13 +40,13 @@ public class ProductDAO {
         }
     }
 
-    public List<Product> findByContainedName(String name) throws Exception {
+    public List<hibernate.lesson2.hw3.Product> findByContainedName(String name) throws Exception {
         //- поиск продуктов, которые в своем имени содержать слово name
 
         try (Session session = createSessionFactory().openSession()) {
 
-            Query<Product> query = session.createQuery("from Product where name like :paramName", Product.class);
-            query.setParameter("paramName", "%" + name + "%");
+            Query<Product> query = session.createNativeQuery("SELECT * FROM PRODUCT WHERE NAME LIKE ?", Product.class);
+            query.setParameter(1, "%" + name + "%");
 
             return query.list();
 
@@ -56,14 +55,14 @@ public class ProductDAO {
         }
     }
 
-    public List<Product> findByPrice(int price, int delta) throws Exception {
+    public List<hibernate.lesson2.hw3.Product> findByPrice(int price, int delta) throws Exception {
         // - поиск продуктов по вилке цен price+-delta включительно
         try (Session session = createSessionFactory().openSession()) {
 
-            Query<Product> query = session.createQuery("from Product where price " +
-                    "between :paramPriceFrom and :paramPriceTo", Product.class);
-            query.setParameter("paramPriceFrom", price - delta);
-            query.setParameter("paramPriceTo", price + delta);
+            Query<hibernate.lesson2.hw3.Product> query = session.createNativeQuery("SELECT * FROM PRODUCT " +
+                    "WHERE PRICE BETWEEN ? AND ?", Product.class);
+            query.setParameter(1, price - delta);
+            query.setParameter(2, price + delta);
 
             return query.list();
 
@@ -72,14 +71,14 @@ public class ProductDAO {
         }
     }
 
-    public List<Product> findByNameSortedAsc(String name) throws Exception {
+    public List<hibernate.lesson2.hw3.Product> findByNameSortedAsc(String name) throws Exception {
         //- поиск продуктов по имени, результат отсортирован по алфавитному порядку колонки name
 
         try (Session session = createSessionFactory().openSession()) {
 
-            Query<Product> query = session.createQuery("from Product where name like :paramName order by name asc "
-                    , Product.class);
-            query.setParameter("paramName", name);
+            Query<hibernate.lesson2.hw3.Product> query = session.createNativeQuery("SELECT * FROM PRODUCT WHERE NAME LIKE ? " +
+                    "ORDER BY NAME ASC", hibernate.lesson2.hw3.Product.class);
+            query.setParameter(1, name);
 
             return query.list();
 
@@ -88,14 +87,14 @@ public class ProductDAO {
         }
     }
 
-    public List<Product> findByNameSortedDesc(String name) throws Exception {
+    public List<hibernate.lesson2.hw3.Product> findByNameSortedDesc(String name) throws Exception {
         //- поиск продуктов по имени, результат отсортирован начиная с конца алфавита колонки name
 
         try (Session session = createSessionFactory().openSession()) {
 
-            Query<Product> query = session.createQuery("from Product where name like :paramName order by name desc "
-                    , Product.class);
-            query.setParameter("paramName", name);
+            Query<hibernate.lesson2.hw3.Product> query = session.createNativeQuery("SELECT * FROM PRODUCT WHERE NAME LIKE ? " +
+                    "ORDER BY NAME DESC", Product.class);
+            query.setParameter(1, name);
 
             return query.list();
 
@@ -104,15 +103,16 @@ public class ProductDAO {
         }
     }
 
-    public List<Product> findByPriceSortedDesc(int price, int delta) throws Exception {
+    public List<hibernate.lesson2.hw3.Product> findByPriceSortedDesc(int price, int delta) throws Exception {
         //- поиск продуктов по вилке цен price+-delta включительно, результат отсортирован по убыванию цен
 
         try (Session session = createSessionFactory().openSession()) {
 
-            Query<Product> query = session.createQuery("from Product where price " +
-                    "between :paramPriceFrom and :paramPriceTo order by price desc", Product.class);
-            query.setParameter("paramPriceFrom", price - delta);
-            query.setParameter("paramPriceTo", price + delta);
+            Query<hibernate.lesson2.hw3.Product> query = session.createNativeQuery("SELECT * FROM PRODUCT " +
+                    "WHERE PRICE BETWEEN ? AND ? ORDER BY PRICE DESC", Product.class);
+
+            query.setParameter(1, price - delta);
+            query.setParameter(2, price + delta);
 
             return query.list();
 
