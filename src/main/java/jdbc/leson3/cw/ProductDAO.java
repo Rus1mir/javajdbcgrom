@@ -9,9 +9,12 @@ public class ProductDAO {
     private static final String DB_URL = "jdbc:oracle:thin:@gromcode-lessons.cctyscdfcahc.us-east-2.rds.amazonaws.com:1521:ORCL";
 
     private static final String USER = "main";
-    private static final String PASS = "fdnjvj,bkm123";
+    private static final String PASS = "xthtgf[f1";
 
     public Product save(Product product) {
+
+
+
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO PRODUCT VALUES(?,?,?,?)")) {
 

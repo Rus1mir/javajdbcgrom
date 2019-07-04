@@ -11,7 +11,7 @@ public class Demo {
         product.setDescription("i will go to hell");
         product.setPrice(33);
 
-        //repository.save(product);
+        repository.save(product);
         //repository.update(product);
         repository.delete(100L);
     }

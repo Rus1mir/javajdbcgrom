@@ -2,7 +2,9 @@ package jdbc.leson3.cw;
 
 public class Demo {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException{
+
+        Class.forName("oracle.jdbc.driver.OracleDriver");
 
         ProductDAO productDAO = new ProductDAO();
 
