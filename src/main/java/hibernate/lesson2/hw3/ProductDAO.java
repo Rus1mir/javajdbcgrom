@@ -10,7 +10,7 @@ public class ProductDAO {
 
     private SessionFactory sessionFactory;
 
-    public hibernate.lesson2.hw3.Product findById(Long id) throws Exception {
+    public Product findById(Long id) throws Exception {
         //- поиск продукта по id
 
         try (Session session = createSessionFactory().openSession()) {
@@ -59,8 +59,8 @@ public class ProductDAO {
         // - поиск продуктов по вилке цен price+-delta включительно
         try (Session session = createSessionFactory().openSession()) {
 
-            Query<hibernate.lesson2.hw3.Product> query = session.createNativeQuery("SELECT * FROM PRODUCT " +
-                    "WHERE PRICE BETWEEN ? AND ?", Product.class);
+            Query<hibernate.lesson2.hw3.Product> query = session.createNativeQuery("SELECT * FROM PRODUCT WHERE PRICE BETWEEN ? AND ?",
+                    Product.class);
             query.setParameter(1, price - delta);
             query.setParameter(2, price + delta);
 
@@ -76,8 +76,8 @@ public class ProductDAO {
 
         try (Session session = createSessionFactory().openSession()) {
 
-            Query<hibernate.lesson2.hw3.Product> query = session.createNativeQuery("SELECT * FROM PRODUCT WHERE NAME LIKE ? " +
-                    "ORDER BY NAME ASC", Product.class);
+            Query<hibernate.lesson2.hw3.Product> query = session.createNativeQuery("SELECT * FROM PRODUCT WHERE NAME LIKE ? ORDER BY NAME ASC",
+                    Product.class);
             query.setParameter(1, name);
 
             return query.list();
@@ -92,8 +92,8 @@ public class ProductDAO {
 
         try (Session session = createSessionFactory().openSession()) {
 
-            Query<hibernate.lesson2.hw3.Product> query = session.createNativeQuery("SELECT * FROM PRODUCT WHERE NAME LIKE ? " +
-                    "ORDER BY NAME DESC", Product.class);
+            Query<hibernate.lesson2.hw3.Product> query = session.createNativeQuery("SELECT * FROM PRODUCT WHERE NAME LIKE ? ORDER BY NAME DESC",
+                    Product.class);
             query.setParameter(1, name);
 
             return query.list();
@@ -108,8 +108,8 @@ public class ProductDAO {
 
         try (Session session = createSessionFactory().openSession()) {
 
-            Query<hibernate.lesson2.hw3.Product> query = session.createNativeQuery("SELECT * FROM PRODUCT " +
-                    "WHERE PRICE BETWEEN ? AND ? ORDER BY PRICE DESC", Product.class);
+            Query<hibernate.lesson2.hw3.Product> query = session.createNativeQuery("SELECT * FROM PRODUCT WHERE PRICE BETWEEN ? AND ? ORDER BY PRICE DESC",
+                    Product.class);
 
             query.setParameter(1, price - delta);
             query.setParameter(2, price + delta);
