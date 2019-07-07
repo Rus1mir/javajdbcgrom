@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table (name = "ROOM")
+@Table(name = "ROOM")
 public class Room {
     private long id;
     private int numberOfGuests;
@@ -17,8 +17,8 @@ public class Room {
     public Room(int numberOfGuests, double price, int breakfastIncluded, int petsAllowed, Date dateAvailableFrom, Hotel hotel) {
         this.numberOfGuests = numberOfGuests;
         this.price = price;
-        this.breakfastIncluded = breakfastIncluded;
-        this.petsAllowed = petsAllowed;
+        this.breakfastIncluded = breakfastIncluded > 0 ? 1 : 0;
+        this.petsAllowed = petsAllowed > 0 ? 1 : 0;
         this.dateAvailableFrom = dateAvailableFrom;
         this.hotel = hotel;
     }
@@ -59,9 +59,8 @@ public class Room {
         return dateAvailableFrom;
     }
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "HOTEL_ID")
-
     public Hotel getHotel() {
         return hotel;
     }
@@ -79,11 +78,11 @@ public class Room {
     }
 
     public void setBreakfastIncluded(int breakfastIncluded) {
-        this.breakfastIncluded = breakfastIncluded;
+        this.breakfastIncluded = breakfastIncluded > 0 ? 1 : 0;
     }
 
     public void setPetsAllowed(int petsAllowed) {
-        this.petsAllowed = petsAllowed;
+        this.petsAllowed = petsAllowed > 0 ? 1 : 0;
     }
 
     public void setDateAvailableFrom(Date dateAvailableFrom) {
@@ -92,5 +91,18 @@ public class Room {
 
     public void setHotel(Hotel hotel) {
         this.hotel = hotel;
+    }
+
+    @Override
+    public String toString() {
+        return "Room{" +
+                "id=" + id +
+                ", numberOfGuests=" + numberOfGuests +
+                ", price=" + price +
+                ", breakfastIncluded=" + breakfastIncluded +
+                ", petsAllowed=" + petsAllowed +
+                ", dateAvailableFrom=" + dateAvailableFrom +
+                ", hotel=" + hotel +
+                '}';
     }
 }
