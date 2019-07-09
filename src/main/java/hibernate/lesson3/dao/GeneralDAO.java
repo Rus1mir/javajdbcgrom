@@ -1,11 +1,7 @@
 package hibernate.lesson3.dao;
-
-import hibernate.lesson1.HibernateUtils;
 import hibernate.lesson3.model.Entity_;
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.proxy.HibernateProxy;
-import org.hibernate.proxy.LazyInitializer;
 
 public abstract class GeneralDAO<T extends Entity_> {
 
