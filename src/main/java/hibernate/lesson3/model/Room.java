@@ -5,8 +5,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "ROOM")
-public class Room {
-    private long id;
+public class Room extends Entity_ {
     private int numberOfGuests;
     private double price;
     private int breakfastIncluded; //(1 или 0)
@@ -102,7 +101,7 @@ public class Room {
                 ", breakfastIncluded=" + breakfastIncluded +
                 ", petsAllowed=" + petsAllowed +
                 ", dateAvailableFrom=" + dateAvailableFrom +
-                ", hotel=" + hotel +
+                ", hotel=" + hotel.toString() +
                 '}';
     }
 }

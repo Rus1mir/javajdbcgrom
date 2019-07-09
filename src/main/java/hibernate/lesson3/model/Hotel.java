@@ -4,9 +4,8 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "HOTEL")
-public class Hotel {
+public class Hotel extends Entity_ {
 
-    private long id;
     private String name;
     private String country;
     private String city;
