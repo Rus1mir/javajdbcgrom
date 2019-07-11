@@ -19,7 +19,7 @@ public class Demo {
         Room room = new Room(2, 333, 1, 0, new Date(), hotel);
         System.out.println(roomDAO.save(room));
 
-        Room room1 =  roomDAO.findById(room.getId());
+        Room room1 =  roomDAO.testF(room.getId());
         System.out.println(room1);
 
         room1.getHotel().setName("Renamed");

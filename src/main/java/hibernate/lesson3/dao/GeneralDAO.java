@@ -1,7 +1,9 @@
 package hibernate.lesson3.dao;
 import hibernate.lesson3.model.Entity_;
+import hibernate.lesson3.model.Room;
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 
 public abstract class GeneralDAO<T extends Entity_> {
 
@@ -89,6 +91,17 @@ public abstract class GeneralDAO<T extends Entity_> {
             throw new Exception("Operation delete with entity " + type.getName() +
                     " id: " + id + " was filed", e);
         }
+    }
+
+    protected T testGet (long id) {
+
+        Session session = createSessionFactory().openSession();
+        Query<T> query = session.createQuery("SELECT r FROM Room r join fetch r.hotel where r.id = :Id ", type);
+        query.setParameter("Id", id);
+
+        T room = query.getSingleResult();
+        session.close();
+        return room;
     }
 
     private SessionFactory createSessionFactory() {

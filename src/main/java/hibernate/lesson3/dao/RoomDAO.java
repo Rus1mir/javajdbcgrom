@@ -27,5 +27,9 @@ public class RoomDAO extends GeneralDAO<Room> {
 
         return  findEntityById(id);
     }
+
+    public Room testF(long id) throws Exception {
+        return testGet(id);
+    }
 }
 

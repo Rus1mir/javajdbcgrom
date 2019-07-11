@@ -1,11 +1,12 @@
 package hibernate.lesson4.model;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name = "ROOM")
 public class Room {
-    private Long id;
+    private Long id = -1L;
     private Integer numberOfGuests;
     private double price;
     private boolean breakfastIncluded;
@@ -26,30 +27,41 @@ public class Room {
     public Room() {
     }
 
+    @Id
+    @SequenceGenerator(name = "ROOM_SEQ", sequenceName = "ROOM_SEQUENCE", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ROOM_SEQ")
+    @Column(name = "ROOM_ID")
     public Long getId() {
         return id;
     }
 
+    @Column(name = "NUMBER_OF_GUESTS")
     public Integer getNumberOfGuests() {
         return numberOfGuests;
     }
 
+    @Column(name = "PRICE")
     public double getPrice() {
         return price;
     }
 
+    @Column(name = "BREAKFAST_INCLUDED")
     public boolean isBreakfastIncluded() {
         return breakfastIncluded;
     }
 
+    @Column(name = "PETS_ALLOWED")
     public boolean isPetsAllowed() {
         return petsAllowed;
     }
 
+    @Column(name = "DATE_AVAILABLE_FROM")
     public Date getDateAvailableFrom() {
         return dateAvailableFrom;
     }
 
+    @ManyToOne
+    @JoinColumn(name="HOTEL_ID", nullable = false)
     public Hotel getHotel() {
         return hotel;
     }

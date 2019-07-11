@@ -1,19 +1,22 @@
 package hibernate.lesson4.model;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.util.List;
 
+import static javax.persistence.CascadeType.ALL;
+
 @Entity
+@Table(name = "HOTEL")
 public class Hotel {
-   private Long id;
+   private Long id = -1L;
    private String name;
    private String country;
    private String city;
    private String street;
-   private List rooms;
+   private List<Room> rooms;
 
-    public Hotel(Long id, String name, String country, String city, String street, List rooms) {
-        this.id = id;
+    public Hotel(String name, String country, String city, String street, List<Room> rooms) {
+
         this.name = name;
         this.country = country;
         this.city = city;
@@ -24,27 +27,36 @@ public class Hotel {
     public Hotel() {
     }
 
+    @Id
+    @SequenceGenerator(name = "HOTEL_SEQ", sequenceName = "HOTEL_SEQUENCE", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "HOTEL_SEQ")
+    @Column(name = "HOTEL_ID")
     public Long getId() {
         return id;
     }
 
+    @Column(name = "NAME")
     public String getName() {
         return name;
     }
 
+    @Column(name = "COUNTRY")
     public String getCountry() {
         return country;
     }
 
+    @Column(name = "CITY")
     public String getCity() {
         return city;
     }
 
+    @Column(name = "STREET")
     public String getStreet() {
         return street;
     }
 
-    public List getRooms() {
+    @OneToMany(fetch = FetchType.LAZY, cascade=ALL, mappedBy="hotel")
+    public List<Room> getRooms() {
         return rooms;
     }
 
@@ -68,7 +80,7 @@ public class Hotel {
         this.street = street;
     }
 
-    public void setRooms(List rooms) {
+    public void setRooms(List<Room> rooms) {
         this.rooms = rooms;
     }
 }

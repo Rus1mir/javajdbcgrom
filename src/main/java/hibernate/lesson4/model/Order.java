@@ -33,22 +33,29 @@ public class Order {
         return id;
     }
 
+    @ManyToOne
+    @JoinColumn(name="USER_ID", nullable=false)
     public User getUserOrdered() {
         return userOrdered;
     }
 
+    @OneToOne (fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name="ROOM_ID")
     public Room getRoom() {
         return room;
     }
 
+    @Column(name = "DATE_FROM")
     public Date getDateFrom() {
         return dateFrom;
     }
 
+    @Column(name = "DATE_TO")
     public Date getDateTo() {
         return dateTo;
     }
 
+    @Column(name = "MONEY_PAID")
     public double getMoneyPaid() {
         return moneyPaid;
     }

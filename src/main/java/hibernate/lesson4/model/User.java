@@ -44,7 +44,7 @@ public class User {
         return userType;
     }
 
-    @OneToMany(cascade = ALL, mappedBy="userOrdered")
+    @OneToMany(fetch = FetchType.LAZY, cascade = ALL, mappedBy="userOrdered")
     public List<Order> getOrders() {
         return orders;
     }
