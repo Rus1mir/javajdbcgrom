@@ -6,7 +6,7 @@ import java.util.List;
 import static javax.persistence.CascadeType.ALL;
 
 @Entity
-@Table(name = "HOTEL")
+@Table(name = "HOTELS")
 public class Hotel {
    private Long id = -1L;
    private String name;
@@ -55,7 +55,8 @@ public class Hotel {
         return street;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, cascade=ALL, mappedBy="hotel")
+    @OneToMany(cascade = ALL)
+    @JoinColumn(name = "HOTEL_ID")
     public List<Room> getRooms() {
         return rooms;
     }
@@ -82,5 +83,17 @@ public class Hotel {
 
     public void setRooms(List<Room> rooms) {
         this.rooms = rooms;
+    }
+
+    @Override
+    public String toString() {
+        return "Hotel{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", country='" + country + '\'' +
+                ", city='" + city + '\'' +
+                ", street='" + street + '\'' +
+                ", contain rooms=" + rooms.size() +
+                '}';
     }
 }

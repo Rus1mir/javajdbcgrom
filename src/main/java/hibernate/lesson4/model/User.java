@@ -6,7 +6,7 @@ import java.util.List;
 import static javax.persistence.CascadeType.ALL;
 
 @Entity
-@Table(name = "\"USER\"")
+@Table(name = "USERS")
 public class User {
     private Long id;
     private String userName;
@@ -44,7 +44,7 @@ public class User {
         return userType;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = ALL, mappedBy="userOrdered")
+    @OneToMany(cascade = ALL, mappedBy="userOrdered")
     public List<Order> getOrders() {
         return orders;
     }

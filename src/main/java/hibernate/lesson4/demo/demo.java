@@ -18,20 +18,18 @@ public class demo {
 
         List<Room> rooms = new ArrayList<>();
 
-        Hotel hotel = new Hotel("Palace", "USA", "NewYork", "Presley", rooms);
+        Hotel hotel =  hotelDAO.findById(86);
+        System.out.println(hotel);
+        System.out.println(hotel.getRooms());
 
-        Room room = new Room(2, 545.34, true, false, new Date(), hotel);
-        Room room1 = new Room(5, 344.87, true, false, new Date(), hotel);
-        Room room2 = new Room(2, 555.6, true, false, new Date(), hotel);
+        //Hotel hotel1 = new Hotel("Savoy", "Germany", "Berlin", "Shtrasse1", rooms);
 
-        rooms.add(room);
-        rooms.add(room1);
-        rooms.add(room2);
-
+        //System.out.println(hotel);
+        //Room room = new Room(5, 789.25, false, true, new Date(), hotel);
         //roomDAO.save(room);
+        //Room room1 = new Room(5, 344.87, true, false, new Date(), hotel);
+        //Room room2 = new Room(2, 555.6, true, false, new Date(), hotel);
 
-        hotelDAO.save(hotel);
 
-        System.out.println("hello");
     }
 }

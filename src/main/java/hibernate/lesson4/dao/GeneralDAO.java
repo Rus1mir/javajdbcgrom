@@ -26,7 +26,8 @@ public abstract class GeneralDAO <T> {
             return entity;
 
         }catch(HibernateException e) {
-            tr.rollback();
+            if(tr != null)
+                tr.rollback();
             throw new Exception("Save failed");
         }
     }
@@ -39,8 +40,13 @@ public abstract class GeneralDAO <T> {
         return null;
     }
 
-    protected T findEntityById(long id) {
-        return null;
+    protected T findEntityById(long id) throws Exception{
+        try(Session session = getSessionFactory().openSession()) {
+
+            return session.load(type, id);
+        }catch (HibernateException e) {
+            throw new Exception("Find operation filed");
+        }
     }
 
     protected SessionFactory getSessionFactory () {

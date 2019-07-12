@@ -13,7 +13,7 @@ public class HotelDAO extends GeneralDAO<Hotel> {
         return saveEntity(hotel);
     }
 
-    public Hotel findById(long id) {
+    public Hotel findById(long id) throws Exception{
 
         return findEntityById(id);
     }

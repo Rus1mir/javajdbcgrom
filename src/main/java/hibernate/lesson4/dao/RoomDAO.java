@@ -13,7 +13,7 @@ public class RoomDAO extends GeneralDAO<Room> {
        return saveEntity(room);
     }
 
-    public Room findById (long id) {
+    public Room findById (long id) throws Exception {
 
         return findEntityById(id);
     }

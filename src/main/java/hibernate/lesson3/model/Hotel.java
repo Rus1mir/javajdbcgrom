@@ -3,7 +3,7 @@ package hibernate.lesson3.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "HOTEL")
+@Table(name = "HOTELS")
 public class Hotel extends Entity_ {
 
     private String name;

@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "ROOM")
+@Table(name = "ROOMS")
 public class Room {
     private Long id = -1L;
     private Integer numberOfGuests;
@@ -60,8 +60,8 @@ public class Room {
         return dateAvailableFrom;
     }
 
-    @ManyToOne
-    @JoinColumn(name="HOTEL_ID", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "HOTEL_ID")
     public Hotel getHotel() {
         return hotel;
     }
@@ -92,5 +92,18 @@ public class Room {
 
     public void setHotel(Hotel hotel) {
         this.hotel = hotel;
+    }
+
+    @Override
+    public String toString() {
+        return "Room{" +
+                "id=" + id +
+                ", numberOfGuests=" + numberOfGuests +
+                ", price=" + price +
+                ", breakfastIncluded=" + breakfastIncluded +
+                ", petsAllowed=" + petsAllowed +
+                ", dateAvailableFrom=" + dateAvailableFrom +
+                ", hotel=" + hotel +
+                '}';
     }
 }
