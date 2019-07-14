@@ -7,13 +7,24 @@ import static javax.persistence.CascadeType.ALL;
 
 @Entity
 @Table(name = "USERS")
-public class User {
+public class User implements Identifiable {
     private Long id;
     private String userName;
     private String password;
     private String country;
     private UserType userType;
     private List <Order> orders;
+
+    public User(String userName, String password, String country, UserType userType, List<Order> orders) {
+        this.userName = userName;
+        this.password = password;
+        this.country = country;
+        this.userType = userType;
+        this.orders = orders;
+    }
+
+    public User() {
+    }
 
     @Id
     @SequenceGenerator(name = "USER_SEQ", sequenceName = "USER_SEQUENCE", allocationSize = 1)
@@ -44,7 +55,8 @@ public class User {
         return userType;
     }
 
-    @OneToMany(cascade = ALL, mappedBy="userOrdered")
+    @OneToMany(cascade = ALL, orphanRemoval = true)
+    @JoinColumn(name = "USER_ID")
     public List<Order> getOrders() {
         return orders;
     }

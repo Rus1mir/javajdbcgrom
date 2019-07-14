@@ -13,8 +13,17 @@ public class HotelDAO extends GeneralDAO<Hotel> {
         return saveEntity(hotel);
     }
 
+    public Hotel update(Hotel hotel) throws Exception {
+
+        return updateEntity(hotel);
+    }
+
     public Hotel findById(long id) throws Exception{
 
         return findEntityById(id);
+    }
+
+    public void delete(long id) throws Exception{
+        deleteEntity(id);
     }
 }

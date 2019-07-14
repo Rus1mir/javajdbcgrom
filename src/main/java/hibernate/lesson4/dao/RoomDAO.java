@@ -10,11 +10,19 @@ public class RoomDAO extends GeneralDAO<Room> {
 
     public Room save(Room room) throws Exception {
 
-       return saveEntity(room);
+        return saveEntity(room);
     }
 
-    public Room findById (long id) throws Exception {
+    public Room update(Room room) throws Exception {
+        return updateEntity(room);
+    }
+
+    public Room findById(long id) throws Exception {
 
         return findEntityById(id);
+    }
+
+    public void delete(long id) throws Exception {
+        deleteEntity(id);
     }
 }

@@ -7,7 +7,7 @@ import static javax.persistence.CascadeType.ALL;
 
 @Entity
 @Table(name = "HOTELS")
-public class Hotel {
+public class Hotel  implements Identifiable {
    private Long id = -1L;
    private String name;
    private String country;
@@ -55,7 +55,7 @@ public class Hotel {
         return street;
     }
 
-    @OneToMany(cascade = ALL)
+    @OneToMany(cascade = ALL, orphanRemoval = true)
     @JoinColumn(name = "HOTEL_ID")
     public List<Room> getRooms() {
         return rooms;

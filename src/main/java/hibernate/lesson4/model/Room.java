@@ -5,7 +5,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "ROOMS")
-public class Room {
+public class Room implements Identifiable {
     private Long id = -1L;
     private Integer numberOfGuests;
     private double price;

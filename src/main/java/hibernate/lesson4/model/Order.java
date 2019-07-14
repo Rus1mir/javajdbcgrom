@@ -5,7 +5,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "ORDERS")
-public class Order {
+public class Order implements Identifiable {
     private Long id;
     private User userOrdered;
     private Room room;
@@ -13,8 +13,8 @@ public class Order {
     private Date dateTo;
     double moneyPaid;
 
-    public Order(Long id, User userOrdered, Room room, Date dateFrom, Date dateTo, double moneyPaid) {
-        this.id = id;
+    public Order(User userOrdered, Room room, Date dateFrom, Date dateTo, double moneyPaid) {
+
         this.userOrdered = userOrdered;
         this.room = room;
         this.dateFrom = dateFrom;
@@ -33,14 +33,14 @@ public class Order {
         return id;
     }
 
-    @ManyToOne
-    @JoinColumn(name="USER_ID", nullable=false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name="USER_ID", nullable = false)
     public User getUserOrdered() {
         return userOrdered;
     }
 
-    @OneToOne (fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name="ROOM_ID")
+    @ManyToOne (fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name="ROOM_ID", nullable = false)
     public Room getRoom() {
         return room;
     }
