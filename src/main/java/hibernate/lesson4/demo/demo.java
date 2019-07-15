@@ -23,13 +23,13 @@ public class demo {
         //userDAO.save(user);
 
         //Room room = roomDAO.findById(110);
-        User user = userDAO.findById(1);
+        //User user = userDAO.findById(1);
         //Order order = new Order(user, room, new Date(), new Date(), 333D);
         //orderDAO.save(order);
 
-        userDAO.getUserByNameAndPass("Ivan", "123");
+        //userDAO.getUserByNameAndPass("Ivan", "123");
         //List<Room> rooms = new ArrayList<>();
-
+        roomDAO.getRoomByFilter();
         //Hotel hotel =  hotelDAO.findById(86);
         //System.out.println(hotel);
         //List<Room> rooms = hotel.getRooms();
