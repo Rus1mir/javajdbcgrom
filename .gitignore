@@ -31,3 +31,5 @@ hs_err_pid*
 /.gitignore
 src/main/resources/
 target/
+/src/resources/hibernate.cfg.xml
+/src/main/java/hibernate/lesson4/task.docx

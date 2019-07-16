@@ -30,7 +30,7 @@ public class Hotel  implements Identifiable {
     @Id
     @SequenceGenerator(name = "HOTEL_SEQ", sequenceName = "HOTEL_SEQUENCE", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "HOTEL_SEQ")
-    @Column(name = "HOTEL_ID")
+    @Column(name = "ID")
     public Long getId() {
         return id;
     }

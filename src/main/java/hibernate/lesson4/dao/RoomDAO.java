@@ -1,16 +1,9 @@
 package hibernate.lesson4.dao;
 
-import hibernate.lesson4.model.Hotel;
 import hibernate.lesson4.model.Room;
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.query.Query;
 
-import javax.persistence.EntityGraph;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.*;
-import java.util.ArrayList;
 import java.util.List;
+
 
 public class RoomDAO extends GeneralDAO<Room> {
 
@@ -38,37 +31,17 @@ public class RoomDAO extends GeneralDAO<Room> {
         deleteEntity(id);
     }
 
-    public Room getRoomByFilter() {
+    public List<Room> getRoomByFilter(Filter filter) throws Exception {
 
-        Session session = getSessionFactory().openSession();
+        String hql = "from Room r join fetch r.hotel as h where " +
+                "(r.numberOfGuests = :numberOfGuests or :numberOfGuests = null) and " +
+                "(r.price <= :price or :price = null) and " +
+                "(r.breakfastIncluded = :breakfastIncluded or :breakfastIncluded = null) and " +
+                "(r.petsAllowed = :petsAllowed or :petsAllowed = null) and " +
+                "(trunc(r.dateAvailableFrom) <= trunc(:dateAvailableFrom) or :dateAvailableFrom = null) and" +
+                "(h.country like :country or :country = null) and " +
+                "(h.city like :city or :city = null)";
 
-        Query<Room> query = session.createQuery("from Room where (true or id>3) ", Room.class);
-
-        //query.setParameter("w","Palace");
-        //query.setParameter(2,"qq");
-
-
-        List<Room> rooms = query.list();
-/*
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Room> query = builder.createQuery(Room.class);
-        Root<Room> root = query.from(Room.class);
-        Join<Room, Hotel> join = root.join("hotel");
-
-        Float f = 700f;
-
-        Predicate predicate = builder.lessThan(root.get("price"), 700);
-        Predicate predicate1 = builder.conjunction();
-
-        query.select(root).where(predicate1);
-
-        EntityGraph<Room> fetchGraph = session.createEntityGraph(Room.class);
-        fetchGraph.addSubgraph("hotel");
-        TypedQuery<Room> q = session.createQuery(query).setHint("javax.persistence.loadgraph", fetchGraph);
-        List<Room> allitems = q.getResultList();
-*/
-
-
-        return null;
+        return getEntitiesByQuery(hql, filter.getParamMap());
     }
 }

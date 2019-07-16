@@ -29,7 +29,7 @@ public class User implements Identifiable {
     @Id
     @SequenceGenerator(name = "USER_SEQ", sequenceName = "USER_SEQUENCE", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_SEQ")
-    @Column(name = "USER_ID")
+    @Column(name = "ID")
     public Long getId() {
         return id;
     }
@@ -83,5 +83,17 @@ public class User implements Identifiable {
 
     public void setOrders(List<Order> orders) {
         this.orders = orders;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", country='" + country + '\'' +
+                ", userType=" + userType +
+                ", has orders=" + orders.size() +
+                '}';
     }
 }

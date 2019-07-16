@@ -30,7 +30,7 @@ public class Room implements Identifiable {
     @Id
     @SequenceGenerator(name = "ROOM_SEQ", sequenceName = "ROOM_SEQUENCE", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ROOM_SEQ")
-    @Column(name = "ROOM_ID")
+    @Column(name = "ID")
     public Long getId() {
         return id;
     }

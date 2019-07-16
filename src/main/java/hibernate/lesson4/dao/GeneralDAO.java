@@ -7,7 +7,6 @@ import org.hibernate.query.Query;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 public abstract class GeneralDAO<T extends Identifiable> {
@@ -88,17 +87,14 @@ public abstract class GeneralDAO<T extends Identifiable> {
         }
     }
 
-    protected List<T> getEntitiesByQuery(String sql, List<Object> params) throws Exception {
+    protected List<T> getEntitiesByQuery(String hql, HashMap<String, Object> params) throws Exception {
         try(Session session = getSessionFactory().openSession()) {
 
-            Query<T> query = session.createNativeQuery(sql, type);
+            Query<T> query = session.createQuery(hql, type);
 
-            int i = 1;
-            for (Object o : params) {
-                query.setParameter(i, o);
-                i++;
+            for(String key : query.getParameterMetadata().getNamedParameterNames()){
+                query.setParameter(key, params.get(key));
             }
-
 
             return query.getResultList();
         }catch (HibernateException e) {

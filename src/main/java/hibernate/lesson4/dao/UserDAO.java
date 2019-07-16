@@ -2,9 +2,11 @@ package hibernate.lesson4.dao;
 
 import hibernate.lesson4.model.User;
 import hibernate.lesson4.model.UserType;
+import org.hibernate.query.Query;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
 
 public class UserDAO extends GeneralDAO<User> {
 
@@ -59,11 +61,24 @@ public class UserDAO extends GeneralDAO<User> {
 
     public User getUserByNameAndPass(String name, String password) throws Exception {
 
-        String sql = "SELECT * FROM USERS WHERE USER_NAME = ? AND PASSWORD = ?";
-        List<Object> params = new ArrayList<>();
-        params.add(name);
-        params.add(password);
-        List<User> users = getEntitiesByQuery(sql, params);
-        return null;
+        String hql = "from User u where " +
+                "u.userName like :name and " +
+                "u.password like password";
+        HashMap<String, Object> params = new HashMap<>(2);
+
+        params.put("name", name);
+        params.put("password", password);
+
+        List<User> users = getEntitiesByQuery(hql, params);
+
+        switch (users.size()) {
+            case 0:
+                return null;
+            case 1:
+                return users.get(0);
+            default:
+                System.err.println("User table has duplicate with equal name and pass");
+        }
+        return users.get(0);
     }
 }

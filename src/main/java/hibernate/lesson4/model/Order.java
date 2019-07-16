@@ -28,7 +28,7 @@ public class Order implements Identifiable {
     @Id
     @SequenceGenerator(name = "ORDER_SEQ", sequenceName = "ORDER_SEQUENCE", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ORDER_SEQ")
-    @Column(name = "ORDER_ID")
+    @Column(name = "ID")
     public Long getId() {
         return id;
     }

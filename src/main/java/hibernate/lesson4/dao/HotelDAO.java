@@ -3,6 +3,7 @@ package hibernate.lesson4.dao;
 import hibernate.lesson4.model.Hotel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class HotelDAO extends GeneralDAO<Hotel> {
@@ -32,21 +33,23 @@ public class HotelDAO extends GeneralDAO<Hotel> {
 
     public List<Hotel> findHotelsByName(String name) throws Exception {
 
-        String sql = "SELECT * FROM HOTELS WHERE NAME = ?";
+        String hql = "from Hotel h where h.name = :name";
 
-        List<Object> params = new ArrayList<>();
-        params.add(name);
+        HashMap<String, Object> params = new HashMap<>(1);
 
-        return getEntitiesByQuery(sql, params);
+        params.put("name", name);
+
+        return getEntitiesByQuery(hql, params);
     }
 
     public List<Hotel> findHotelsByCity(String city) throws Exception {
 
-        String sql = "SELECT * FROM HOTELS WHERE CITY = ?";
+        String hql = "from Hotel h where h.city = :city";
 
-        List<Object> params = new ArrayList<>();
-        params.add(city);
+        HashMap<String, Object> params = new HashMap<>(1);
 
-        return getEntitiesByQuery(sql, params);
+        params.put("city", city);
+
+        return getEntitiesByQuery(hql, params);
     }
 }
