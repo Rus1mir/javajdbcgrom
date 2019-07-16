@@ -31,7 +31,7 @@ public class RoomDAO extends GeneralDAO<Room> {
         deleteEntity(id);
     }
 
-    public List<Room> getRoomByFilter(Filter filter) throws Exception {
+    public List<Room> findRooms(Filter filter) throws Exception {
 
         String hql = "from Room r join fetch r.hotel as h where " +
                 "(r.numberOfGuests = :numberOfGuests or :numberOfGuests = null) and " +

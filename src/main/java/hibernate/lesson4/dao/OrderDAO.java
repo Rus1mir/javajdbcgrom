@@ -23,4 +23,13 @@ public class OrderDAO extends GeneralDAO<Order> {
     public void delete(long id) throws Exception {
         deleteEntity(id);
     }
+
+    public Order findByRoomUser(long roomId, long userId) {
+
+        String hql = "from Order o join fetch o.room r  where " +
+                "r.id = :roomId and " +
+                "h.id = :hotelId";
+        //TODO
+        return null;
+    }
 }

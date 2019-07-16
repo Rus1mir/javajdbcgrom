@@ -27,7 +27,7 @@ public class demo {
 
         //userDAO.getUserByNameAndPass("Ivan", "123");
         //List<Room> rooms = new ArrayList<>();
-        //roomDAO.getRoomByFilter();
+        //roomDAO.findRoomsByFilter();
         //Hotel hotel =  hotelDAO.findById(86);
         //System.out.println(hotel);
         //List<Room> rooms = hotel.getRooms();
@@ -51,7 +51,7 @@ public class demo {
         //System.out.println(roomDAO.save(room2));
         //hotelDAO.delete(91);
         //Filter f = new Filter(null,null, null, null, new Date(), "USA", null);
-        //System.out.println(roomDAO.getRoomByFilter(f));
+        //System.out.println(roomDAO.findRoomsByFilter(f));
         System.out.println(userDAO.getUserByNameAndPass("Piter", "1234"));
         System.out.println(hotelDAO.findHotelsByCity("Berlin"));
         System.out.println(hotelDAO.findHotelsByName("Palace"));
