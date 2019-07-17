@@ -2,7 +2,6 @@ package hibernate.lesson4.dao;
 
 import hibernate.lesson4.model.User;
 import hibernate.lesson4.model.UserType;
-import org.hibernate.query.Query;
 
 import java.util.HashMap;
 import java.util.List;

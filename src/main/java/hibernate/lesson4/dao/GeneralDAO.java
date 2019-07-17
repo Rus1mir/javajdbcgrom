@@ -88,17 +88,18 @@ public abstract class GeneralDAO<T extends Identifiable> {
     }
 
     protected List<T> getEntitiesByQuery(String hql, HashMap<String, Object> params) throws Exception {
-        try(Session session = getSessionFactory().openSession()) {
+
+        try (Session session = getSessionFactory().openSession()) {
 
             Query<T> query = session.createQuery(hql, type);
 
-            for(String key : query.getParameterMetadata().getNamedParameterNames()){
+            for (String key : query.getParameterMetadata().getNamedParameterNames()) {
                 query.setParameter(key, params.get(key));
             }
 
             return query.getResultList();
-        }catch (HibernateException e) {
-            throw new Exception("Select query User by name and pass was filed", e);
+        } catch (HibernateException e) {
+            throw new Exception("Select query was filed", e);
         }
     }
 

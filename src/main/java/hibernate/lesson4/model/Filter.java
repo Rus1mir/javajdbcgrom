@@ -1,7 +1,6 @@
-package hibernate.lesson4.dao;
+package hibernate.lesson4.model;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -61,6 +60,7 @@ public class Filter {
         HashMap<String, Object> map = new HashMap<>(fields.length);
 
         for (Field f : fields) {
+
             map.put(f.getName(), f.get(this));
         }
         return map;

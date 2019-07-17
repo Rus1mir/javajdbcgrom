@@ -34,13 +34,13 @@ public class Order implements Identifiable {
     }
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name="USER_ID", nullable = false)
+    @JoinColumn(name = "USER_ID", nullable = false)
     public User getUserOrdered() {
         return userOrdered;
     }
 
-    @ManyToOne (fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name="ROOM_ID", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "ROOM_ID", nullable = false)
     public Room getRoom() {
         return room;
     }
