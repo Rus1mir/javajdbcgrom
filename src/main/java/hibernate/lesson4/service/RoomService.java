@@ -1,24 +1,42 @@
 package hibernate.lesson4.service;
 
 import hibernate.lesson4.dao.*;
-import hibernate.lesson4.exception.AccessDeniedException;
-import hibernate.lesson4.model.Filter;
-import hibernate.lesson4.model.Room;
+import hibernate.lesson4.model.*;
+import jdbc.lesson4.hw.exception.BadRequestException;
 
 import java.util.List;
 
 public class RoomService {
 
-    RoomDAO roomDAO = new RoomDAO();
+    private RoomDAO roomDAO = new RoomDAO();
+    private HotelDAO hotelDAO = new HotelDAO();
+
+    public Room addRoom(Room room, long hotelId) throws Exception {
+
+        UserService.validateUser(UserType.ADMIN);
+
+        Hotel hotel = hotelDAO.findById(hotelId);
+
+        if (hotel != null) {
+
+            hotel.addRoom(room);
+            hotelDAO.update(hotel);
+            return room;
+        }
+        throw new BadRequestException("Hotel with id: " + hotelId + " was not found. Adding room was filed");
+    }
+
+    public void deleteRoom(long id) throws Exception {
+
+        UserService.validateUser(UserType.ADMIN);
+
+        roomDAO.delete(id);
+    }
 
     public List<Room> findRooms(Filter filter) throws Exception {
 
-        validateUser();
-        return roomDAO.findRooms(filter);
-    }
+        UserService.validateUser(UserType.USER);
 
-    private void validateUser() throws Exception {
-        if (UserDAO.isLogined())
-            throw new AccessDeniedException("Operation is not permitted without login, please login");
+        return roomDAO.findRooms(filter);
     }
 }

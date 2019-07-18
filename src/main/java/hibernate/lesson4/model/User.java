@@ -15,12 +15,11 @@ public class User implements Identifiable {
     private UserType userType;
     private List <Order> orders;
 
-    public User(String userName, String password, String country, UserType userType, List<Order> orders) {
+    public User(String userName, String password, String country, UserType userType) {
         this.userName = userName;
         this.password = password;
         this.country = country;
         this.userType = userType;
-        this.orders = orders;
     }
 
     public User() {
@@ -55,8 +54,7 @@ public class User implements Identifiable {
         return userType;
     }
 
-    @OneToMany(cascade = ALL, orphanRemoval = true)
-    @JoinColumn(name = "USER_ID")
+    @OneToMany(mappedBy = "userOrdered", cascade = CascadeType.REMOVE, orphanRemoval = true)
     public List<Order> getOrders() {
         return orders;
     }

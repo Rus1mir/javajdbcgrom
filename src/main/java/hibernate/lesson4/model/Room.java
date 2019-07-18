@@ -15,13 +15,12 @@ public class Room implements Identifiable {
     private Hotel hotel;
 
     public Room(Integer numberOfGuests, double price, boolean breakfastIncluded, boolean petsAllowed,
-                Date dateAvailableFrom, Hotel hotel) {
+                Date dateAvailableFrom) {
         this.numberOfGuests = numberOfGuests;
         this.price = price;
         this.breakfastIncluded = breakfastIncluded;
         this.petsAllowed = petsAllowed;
         this.dateAvailableFrom = dateAvailableFrom;
-        this.hotel = hotel;
     }
 
     public Room() {
@@ -55,6 +54,7 @@ public class Room implements Identifiable {
         return petsAllowed;
     }
 
+    @Temporal(TemporalType.DATE)
     @Column(name = "DATE_AVAILABLE_FROM")
     public Date getDateAvailableFrom() {
         return dateAvailableFrom;

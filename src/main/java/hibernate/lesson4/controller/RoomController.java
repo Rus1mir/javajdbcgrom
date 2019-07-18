@@ -10,6 +10,16 @@ public class RoomController {
 
     private RoomService roomService = new RoomService();
 
+    public Room addRoom(Room room, long hotelId) throws Exception {
+
+      return roomService.addRoom(room, hotelId);
+    }
+
+    public void deleteRoom(long id) throws Exception {
+
+        roomService.deleteRoom(id);
+    }
+
     public List<Room> findRooms(Filter filter) throws Exception {
 
         return roomService.findRooms(filter);

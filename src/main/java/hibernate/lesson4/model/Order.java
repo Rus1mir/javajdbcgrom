@@ -45,11 +45,13 @@ public class Order implements Identifiable {
         return room;
     }
 
+    @Temporal(TemporalType.DATE)
     @Column(name = "DATE_FROM")
     public Date getDateFrom() {
         return dateFrom;
     }
 
+    @Temporal(TemporalType.DATE)
     @Column(name = "DATE_TO")
     public Date getDateTo() {
         return dateTo;

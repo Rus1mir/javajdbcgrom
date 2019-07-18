@@ -2,7 +2,6 @@ package hibernate.lesson4.dao;
 
 import hibernate.lesson4.model.Hotel;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 

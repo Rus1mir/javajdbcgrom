@@ -9,7 +9,7 @@ import java.util.List;
 
 public class UserDAO extends GeneralDAO<User> {
 
-    public static User loginedUser;
+    private static User loginedUser;
 
     public UserDAO() {
         super(User.class);
@@ -29,7 +29,7 @@ public class UserDAO extends GeneralDAO<User> {
 
     public void login(User user) {
 
-        if (loginedUser != null && user.getId() == loginedUser.getId()) {
+        if (loginedUser != null && user.getId().equals(loginedUser.getId())) {
             System.out.println("User " + user + " was already login");
             return;
         }
@@ -61,8 +61,9 @@ public class UserDAO extends GeneralDAO<User> {
     public User getUserByNameAndPass(String name, String password) throws Exception {
 
         String hql = "from User u where " +
-                "u.userName like :name and " +
-                "u.password like password";
+                "u.userName = :name and " +
+                "u.password = :password";
+
         HashMap<String, Object> params = new HashMap<>(2);
 
         params.put("name", name);

@@ -1,6 +1,7 @@
 package hibernate.lesson4.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import static javax.persistence.CascadeType.ALL;
@@ -15,13 +16,12 @@ public class Hotel  implements Identifiable {
    private String street;
    private List<Room> rooms;
 
-    public Hotel(String name, String country, String city, String street, List<Room> rooms) {
+    public Hotel(String name, String country, String city, String street) {
 
         this.name = name;
         this.country = country;
         this.city = city;
         this.street = street;
-        this.rooms = rooms;
     }
 
     public Hotel() {
@@ -55,8 +55,7 @@ public class Hotel  implements Identifiable {
         return street;
     }
 
-    @OneToMany(cascade = ALL, orphanRemoval = true)
-    @JoinColumn(name = "HOTEL_ID")
+    @OneToMany(mappedBy = "hotel", fetch = FetchType.LAZY, cascade = ALL)
     public List<Room> getRooms() {
         return rooms;
     }
@@ -83,6 +82,15 @@ public class Hotel  implements Identifiable {
 
     public void setRooms(List<Room> rooms) {
         this.rooms = rooms;
+    }
+
+    public void addRoom(Room room) {
+
+        if (rooms == null)
+            rooms = new ArrayList<Room>();
+
+        room.setHotel(this);
+        this.rooms.add(room);
     }
 
     @Override

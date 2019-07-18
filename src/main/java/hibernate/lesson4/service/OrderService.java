@@ -17,13 +17,14 @@ public class OrderService {
     public void bookRoom(long roomId, long userId, Date dateFrom, Date dateTo) throws Exception {
 
         User user = validateUser(userId);
+
         Room room = roomDAO.findById(roomId);
 
         if (room == null)
             throw new BadRequestException("Room id: " + roomId + " was not found in database, booking filed");
 
         if (room.getDateAvailableFrom().after(dateFrom))
-            throw new BadRequestException("Requested room id: " + roomId + " is already booked for requested date!");
+            throw new BadRequestException("Requested room id: " + roomId + " is already booked for requested date");
 
         long daysAmount = ChronoUnit.DAYS.between(dateFrom.toInstant(), dateTo.toInstant());
 
@@ -32,12 +33,13 @@ public class OrderService {
         Order order = new Order(user, room,
                 dateFrom, dateTo, room.getPrice() * daysAmount);
 
-        orderDAO.update(order);
+        orderDAO.processBooking(order, room);
     }
 
     public void cancelReservation(long roomId, long userId) throws Exception {
 
         validateUser(userId);
+
         Room room = roomDAO.findById(roomId);
 
         if (room == null)
@@ -54,11 +56,14 @@ public class OrderService {
         orderDAO.cancelOrder(orders.get(0), room);
     }
 
-    private User validateUser(Long userId) throws AccessDeniedException {
+    private User validateUser (long userId) throws Exception{
+
+        UserService.validateUser(UserType.USER);
+
         User user = UserDAO.getLoginUser();
 
-        if (user == null || user.getId() != userId)
-            throw new AccessDeniedException("Action not permitted for user id " + userId + ", cause this user is not login");
+        if (userId != user.getId())
+            throw new AccessDeniedException("Requested user id: " + userId + " is not currently login");
 
         return user;
     }
